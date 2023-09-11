@@ -1,0 +1,136 @@
+---
+aws well architected: design principles
+---
+# AWS design principles
+---
+- <span style='color:#eb3b5a'>scalability</span>
+	- **horizontally**: increase in number of resources 
+	- **vertically**: increase in hardware specs of an individual resource 
+- <span style='color:#fa8231'>disposable resources instead of fixed servers</span>
+	- **instantiating compute resources**
+		- automate setup of new resources, their config, and code 
+	- **infrastructure as code**
+		- make your whole infra reusable, maintainable, and testable
+- <span style='color:#f7b731'>automation</span>
+	- **serverless management**
+		- focus on code deployment automation. AWS manages management tasks.
+	- **infrastructure management/deployment**
+		- AWS: auto-handles resource provisioning, load balancing, auto scaling, monitoring. 
+			- your focus: resource deployment.
+	- **alarms/events**
+		- AWS services continuously monitor your resources & initiate events when certain metrics/conditions are met 
+- <span style='color:#20bf6b'>loose coupling</span>
+	- **well-defined interfaces**
+		- Reduce interdependencies, make components communicate via REST APIs.
+	- **service discovery**
+		- Apps deployed as a set of small services must work without network knowledge:
+			- hides complexity, permits infrastructure changes.
+	- **asynchronous integration**
+		- For components needing only request acknowledgement, not instant response, integrate via a durable storage layer
+	- **distributed systems best practices**
+		- build apps that handle component failure gracefully 
+- <span style='color:#0fb9b1'>services, not servers</span>
+	- **managed services**
+		- Offer developers building blocks like databases, machine learning, analytics, queuing, search, email, notifications for their apps.
+	- **serverless architecture**
+		- Build event-driven/synchronous services without server management to reduce operational complexity.
+- <span style='color:#2d98da'>databases</span>
+	- choose the right DB for each workload
+	- **relational DB**
+		- strong query language, flexible indexing, integrity controls, and efficient data combination from multiple tables..
+			- [[meta-database#AWS RDS|RDS]], [[meta-database#Amazon Aurora|Aurora]], [[meta-database#Amazon Redshift|RedShift]] 
+	- **noSQL DB**
+		- Trade some relational database abilities for scalable, flexible data models like graphs, key-value pairs, JSON. Enables easier development, improved performance, availability, resilience.
+			- [[meta-database#Amazon DynamoDB|DynamoDB]], [[meta-database#AWS DocumentDB|DocumentDB]], [[summary-database#Amazon ElastiCache fold|ElastiCache]],  
+	- **data warehouse**
+		- specialized type of relational database, which is optimized for analysis and reporting of large amounts of data.
+			- [[meta-database#Amazon Redshift|RedShift meta]], [[summary-database#Amazon Redshift fold|RedShift summary]] 
+	- **graph DB**
+		- uses graph structures for queries 
+		- Query: formal request to specific dataset. 
+		- Search: allows querying unstructured data.
+		- Search service: indexes/searches structured/free text, supports ranking customization, filter faceting, synonyms, stemming.
+			- [[meta-database#Amazon Neptune|Neptune meta]], [[summary-database#Amazon Neptune Graph DB fold|Neptune summary]]  
+- <span style='color:#3867d6'>managing increasing volumes of data</span> 
+	- **data lake**
+		- Architectural approach
+		- Central data storage: vast, available for categorization, processing, analysis, consumed by various organization groups.
+- <span style='color:#8854d0'>removing single points of failure</span>
+	- **introducing redundancy on resource failure**
+		- <span style='color:#eb3b5a'>standby redundancy</span> 
+			- functionality recovers via secondary resource, failover process.
+			- Takes time, resource unavailable during recovery
+			- Common for stateful components like relational databases
+		- <span style='color:#20bf6b'>active redundancy</span> 
+			- Requests distributed to redundant compute resources. 
+			- if one fails, other resources absorb larger workload share.
+	- **detect failure**
+		- use health checks and collect logins
+	- **durable data storage**
+		- <span style='color:#0fb9b1'>synchronous replication</span>
+			- acknowledges transaction after durable storage in primary and replicas.
+			- Protects data integrity, ideal for primary node failure.
+		- <span style='color:#2d98da'>asynchronous replication</span> 
+			- Decouples primary node from replicas: introduces replication lag. 
+			- Changes on primary node not immediately reflected on replicas.
+		- <span style='color:#8854d0'>Quorum-based replication</span>
+			- synchronous + asynchronous replication
+			- Defines minimum nodes needed for a successful write operation
+	- **Automated Multi-Data Center Resilience**
+		- use AWS Regions and Availability Zones (Multi-AZ Principle)
+	- **Fault Isolation and Traditional Horizontal Scaling** 
+		- <span style='color:#eb3b5a'>Shuffle Sharding</span>
+			- reduces failures and improves reliability. 
+			- Resources divided into shards: each user/request assigned unique shard combo. 
+			- If one shard fails, only a small fraction of resource affected. 
+			- Isolates faults, prevents system impact. 
+			- Efficient scaling by adding more shards. 
+			- Alternative to traditional horizontal scaling.
+ - <span style='color:#eb3b5a'>optimize for cost</span>
+	- **right sizing**
+		 - broad range of resource types and configurations for many use cases.
+	- **elasticity**
+		- save money with AWS by taking advantage of the platform’s elasticity.
+	- **Take Advantage of the Variety of Purchasing Options**
+		- reserved vs spot instances for discounts 
+- <span style='color:#eb3b5a'>caching</span> 
+	- **app data caching**
+		- store/retrieve information from fast, managed in-memory caches: [[database-elasticache#^1ed1be|ElastiCache]] 
+	- **edge caching**
+		- Delivers content via nearby infrastructure lowers latency high sustained data rates needed for large objects delivery to end users at scale: [[networking-aws-cloudfront#^00eb30|CloudFront]] 
+- <span style='color:#fa8231'>security</span>
+	- **Use AWS Features for Defense in Depth** 
+		- secure multiple levels of your infrastructure from network down to application and database.
+	- **Share Security Responsibility with AWS** – 
+		- AWS handles the security OF the Cloud while customers handle security IN the Cloud.
+	- **Reduce Privileged Access**  
+		- implement the Principle of Least Privilege controls. [[security-identity-compliance-aws-iam#^ab9f15|IAM]] 
+	- **Security as Code** 
+		- Golden Environment template captures firewall rules, network access controls, internal/external subnets, operating system hardening.
+	- **Real-Time Auditing** 
+		- implement continuous monitoring and automation of controls on AWS to minimize exposure to security risks.
+		- [[monitoring-CloudTrail#^718023|CloudTrail]]
+- <span style='color:#f7b731'>cloud architecture for best practices</span>
+	- **Decouple your components** 
+		- build loosely coupled components for stability if one fails (loose coupling principle). 
+		- Supports Service-Oriented Architecture (SOA) 
+			- loosely coupled system components scale better/stably.
+	- **Think parallel** 
+		- implement parallelization whenever possible  
+		- automate processes of your cloud architecture.
+	- **Implement elasticity**
+		- automate deployment process and streamline config/build process of your architecture. 
+		- ensures system can scale in and scale out to meet demand without human intervention
+	- **Design for failure**  
+		- be a pessimist when designing architectures in the cloud and assumes that the components of your architecture will fail. 
+		- reinforces you to always design your cloud architecture to be highly available and fault-tolerant.
+--- 
+# Resources
+- [cheat sheet](https://tutorialsdojo.com/aws-well-architected-framework-design-principles/) 
+- [[moc-training-notes|home]] 
+- [[summary-aws-design-principles]]
+# Tags
+- #aws-ccp-exam-notes/overview/aws-well-architected/design-principles  
+
+	
+

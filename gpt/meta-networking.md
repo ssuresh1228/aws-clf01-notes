@@ -1,0 +1,43 @@
+---
+gpt-meta: "aws ccp: networking"
+gpt-4: "aws ccp: networking"
+---
+# meta: networking 
+--- 
+- <span style='color:#8854d0'>note(s) summarized: </span>
+	-  [[summary-networking]]
+--- 
+- <span style='color:#eb3b5a'>Amazon API Gateway</span> 
+	- AWS serverless infrastructure
+	- create/manage/secure APIs 
+	- exposes backend via RESTful API  
+	- pay for API calls/data transfer
+- <span style='color:#fa8231'>AWS CloudFront</span>  ^81ac27
+	- global content distribution (caching), fastest edge location used for optimal performance, 
+	- instant delivery if content in edge location, otherwise fetched from origin. 
+	- <span style='color:#eb3b5a'>pricing</span>:
+		- S3 bucket data storage, data transfer, HTTP/HTTPS requests, old data invalidation, security certificates. Extra charges for secure/encrypted requests.
+- <span style='color:#20bf6b'>Amazon VPC</span>
+	- Virtual network for AWS account
+	- EC2's networking layer
+	- <span style='color:#eb3b5a'>pricing</span>: 
+		- VPN, NAT Gateway hours
+		- NAT Gateway data processing fees
+		- Standard AWS data transfer charges
+- <span style='color:#0fb9b1'>Amazon Route 53</span>
+	- highly available, scalable DNS for domain registration, routing, health checking. 
+	- Translates website names to IPs, routes users to internet applications. 
+	- <span style='color:#eb3b5a'>Pricing</span>: 
+		- hosted zone at creation/monthly, free if deleted within 12 hours. 
+		- Billion queries/month, Alias queries to AWS resources free. 
+		- Traffic flow policy record/month. Variable domain name prices.
+- <span style='color:#8854d0'>AWS Direct Connect</span> 
+	- Dedicated network connection premises to AWS
+	- create virtual interfaces to AWS services/VPC 
+	- IAM controls access 
+	- Charge for used network ports and data transfer
+		- Cost depends on port type and usage
+		- Data transfer out charged per GB
+		- No charge for data transfer IN
+# tags:
+- #gpt-meta/aws-ccp/networking  

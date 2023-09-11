@@ -1,0 +1,74 @@
+# AWS well architected: 6 pillars 
+---
+- <span style='color:#eb3b5a'>operational excellence</span>
+	- run/monitor systems to deliver business value
+	- continually improve supporting processes and procedures.
+	- four best practice areas and tools for operational excellence in the cloud:
+		- **Organization** – AWS Cloud Compliance, [[aws-support-trusted-advisor#^33028d|AWS trusted advisor]], [[monitoring-management-aws-orgs#^8e9508|AWS Organizations]]
+	        - **Prepare** – [[monitoring-config#^64534d|AWS Config]]
+	        - **Operate** – [[monitoring-cloudwatch#^7382c4|AWS CloudWatch]]
+	        - **Evolve** – Amazon Elasticsearch Service
+	- Key AWS service:
+		- [**AWS CloudFormation**](https://tutorialsdojo.com/aws-cloudformation/) for creating templates.
+- <span style='color:#fa8231'>security</span>
+	- protect information, systems, and assets while delivering business value through risk assessments and mitigation strategies
+		- **security**
+			- [[shared-responsibility-model|Shared Responsibility model]]
+		- **identity/access management**
+			- [[security-identity-compliance-aws-iam#^ab9f15|AWS IAM]]
+		- **detective controls**
+			- [[monitoring-CloudTrail#^718023|CloudTrail]]
+			- [[monitoring-config#^64534d|AWS Config]]
+			- [[security-identity-compliance-amazon-guard-duty#^04cebc|amazon GuardDuty]]
+		- **infra protection**
+			- [[networking-vpc#^4ff0f7|amazon VPC]]
+			- [[networking-aws-cloudfront#^00eb30|CloudFront]] + [[security-identity-compliance-aws-shield#^4cbf08|AWS Shield]] + [[security-identity-compliance-aws-waf#^e1b31b|AWS WAF]]
+		- **data protection**
+			- [[compute-ELB#^357633|amazon ELB]],  [[storage-s3#^939999|S3]],  [[database-RDS#^5a198f|RDS]] encryption
+			- [[security-identity-compliance-amazon-macie#^c13eab|amazon macie]]
+			- [[security-aws-kms#^bed19a|AWS KMS]]
+		- **incident response**
+			- [[security-identity-compliance-aws-iam#^ab9f15|IAM]]
+			- [[monitoring-cloudwatch#events|CloudWatch events]] 
+- <span style='color:#f7b731'>reliability</span>
+	- recover from infrastructure or service disruptions
+	- dynamically acquire computing resources to meet demand
+	- mitigate disruptions such as misconfigurations or transient network issues
+		- **foundations**
+			- [[security-identity-compliance-aws-iam#^ab9f15|IAM]], [[networking-vpc#^4ff0f7|VPC]], [[aws-support-trusted-advisor#^33028d|Trusted Advisor]], [[security-identity-compliance-aws-shield#^4cbf08|Shield]]
+		- **change management**
+			- [[monitoring-CloudTrail#^718023|CloudTrail]], [[monitoring-config#^64534d|Config]], [[compute-EC2-autoscaling#Overview fold|autoscaling]], [[monitoring-cloudwatch#^7382c4|CloudWatch]]
+		- **failure management**
+			- AWS CloudFormation, [[storage-s3#^939999|S3]], [[security-aws-kms#^bed19a|KMS]], [[storage-s3#S3 GLACIER fold|S3 Glacier]]
+		- **workload architecture**
+			- AWS SDK, [[compute-lambda#^a7928c|Lambda]]
+
+- <span style='color:#20bf6b'>performance efficiency</span>
+	- use computing resources efficiently to meet system requirements
+	- maintain that efficiency as demand changes and technologies evolve
+		- **selection**: 
+			- [[meta-compute#EC2 autoscaling|autoscaling]] for compute 
+			- [[meta-storage#Amazon EBS (Elastic Block Store)|EBS]] and [[meta-storage#Amazon S3 (Simple Storage Service)|S3]] for storage 
+		- **review**: AWS Blogs/what's new
+		- **monitoring**
+			- [[summary-management-monitoring#AWS CloudWatch fold|CloudWatch]] 
+		- **tradeoffs**
+			- [[summary-database#Amazon ElastiCache fold|ElastiCache]], [[meta-networking#^81ac27|CloudFront]], [[meta-storage#AWS Snowball|Snowball]], [[database-RDS#read replicas|RDS read replicas]]  
+- <span style='color:#0fb9b1'>cost optimization</span>
+	- avoid/eliminate unneeded cost/suboptimal resources
+	- **cloud financial management**: [[analytics-amazon-quicksight#^68a572|QuickSight]], [[aws-billing-overview#AWS Cost and usage reports|Cost and Usage Reports]]  
+	- **cost effective resources**: [[aws-billing-overview#AWS Cost explorer|Cost Explorer]], [[monitoring-cloudwatch#^7382c4|CloudWatch]], [[aws-support-trusted-advisor#^33028d|Trusted Advisor]], [[meta-database#Amazon Aurora|Aurora for RDS]] 
+	- **matching supply and demand**: [[meta-compute#EC2 autoscaling|autoscaling]] 
+	- **expenditure awareness**: [[aws-billing-overview#AWS Cost explorer|Cost Explorer]], [[aws-billing-overview#AWS Budgets|Budgets]]
+	- **optimize over time** [[summary-management-monitoring#AWS Support Trusted Advisor|Trusted Advisor]], AWS Blogs/what's new 
+- <span style='color:#2d98da'>sustainability</span> 
+	- increase efficiency across workload's components by maximizing benefits from provisioned resources
+		- **region selection:** [[global infrastructure]]
+		- **user behavior patterns**: [[meta-compute#EC2 autoscaling|Autoscaling]], [[meta-compute#Amazon ELB|elastic load balancing]], 
+		- **software/arch patterns:** [[summary-aws-design-principles]] 
+---
+# References
+- [cheat sheet](https://tutorialsdojo.com/aws-well-architected-framework-six-pillars/)
+# Tags
+- #aws-ccp-exam-notes/overview/aws-well-architected
+---
